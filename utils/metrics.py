@@ -212,6 +212,13 @@ class ConfusionMatrix:
         for i in range(self.nc + 1):
             print(' '.join(map(str, self.matrix[i])))
 
+    def save_csv(self, save_dir, names=None):
+        import pandas as pd
+        df = pd.DataFrame(self.matrix)
+        if names is not None:
+            df.index = names
+            df.columns = names
+        df.to_csv(Path(save_dir) / 'confusion_matrix.csv')
 
 def bbox_iou(box1, box2, xywh=True, GIoU=False, DIoU=False, CIoU=False, eps=1e-7):
     # Returns Intersection over Union (IoU) of box1(1,4) to box2(n,4)

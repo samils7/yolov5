@@ -289,6 +289,8 @@ def run(
     if plots:
         confusion_matrix.plot(save_dir=save_dir, names=list(names.values()))
         callbacks.run('on_val_end')
+        # save confusion matrix as csv file
+        confusion_matrix.save_csv(save_dir=save_dir, names=list(names.values()))
 
     # Save JSON
     if save_json and len(jdict):
